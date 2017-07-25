@@ -216,3 +216,5 @@ pip-log.txt
 .mr.developer.cfg
 
 node_modules/
+logs/
+server-node/auth.js
