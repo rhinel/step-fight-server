@@ -27,15 +27,17 @@ let app = express()
 let httpServer = http.createServer(reapp)
 const httpPORT = process.env.HTTPPORT || 8080
 reapp.all('*', function(req, res) {
-  return res.redirect("https://" + req.headers["host"].replace('8080', '40443') + req.url)
+  return res.redirect("https://" + req.headers["host"].replace('8080', '443') + req.url)
 })
 
 //https-ssl
 let httpsServer = https.createServer({
   key: fs.readFileSync(path.join(__dirname, '../../ssl-key/ssl-fs.rhinel.xyz/ssl-key.key'), 'utf8'),
-  cert: fs.readFileSync(path.join(__dirname, '../../ssl-key/ssl-fs.rhinel.xyz/ssl-key.crt'), 'utf8')
+  cert: fs.readFileSync(path.join(__dirname, '../../ssl-key/ssl-fs.rhinel.xyz/ssl-key.pem'), 'utf8'),
+  ciphers: 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4',
+  honorCipherOrder: true
 }, app)
-const httpsPORT = process.env.HTTPSPORT || 40443
+const httpsPORT = process.env.HTTPSPORT || 443
 app.use(favicon(path.join(__dirname, '../static', 'icon-cloud.png')))
 
 // 处理日志

@@ -3,7 +3,7 @@
 let mongoose = require('mongoose')
 let redis = require('redis')
 let log4js = require('log4js')
-let sysLog = log4js.getLogger('sys')
+let console = log4js.getLogger('console')
 let auth = require('./auth')
 let db
 let rds
@@ -14,7 +14,7 @@ const redisct = (callback)=>{
 	rds.on('error', console.error.bind(console, 'redis connection error:'))
 	rds.on('ready',()=>{
 		callback && callback()
-		sysLog.info(auth.redisIp + ':' + auth.redisPo + ' redis ready!')
+		console.info(auth.redisIp + ':' + auth.redisPo + ' redis ready!')
 	})
 }
 
@@ -88,7 +88,7 @@ const connect = (callback)=>{
 	db.on('error', console.error.bind(console, 'mongoose connection error:'))
 	db.once('open', ()=>{
 		callback && callback()
-		sysLog.info(auth.mongodbPs + ' mongoose opened!')
+		console.info(auth.mongodbPs + ' mongoose opened!')
 	})
 }
 
