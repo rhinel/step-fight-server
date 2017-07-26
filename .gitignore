@@ -218,3 +218,4 @@ pip-log.txt
 node_modules/
 logs/
 server-node/auth.js
+server-node/sftp-config.json
