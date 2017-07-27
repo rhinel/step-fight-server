@@ -14,6 +14,10 @@ let log4js = require('log4js')
 let configLog = require('./config-log')
 let favicon = require('serve-favicon')
 
+// 处理日志
+log4js.configure(configLog)
+let sysLog = log4js.getLogger('sys')
+
 // 启动缓存链接
 db.redisct()
 // 启动数据库链接
@@ -22,12 +26,17 @@ db.connect()
 // 启动路由及端口处理
 let reapp = express()
 let app = express()
+app.use(log4js.connectLogger(log4js.getLogger('http'), { level: 'auto' }))
 
 // http转发
 let httpServer = http.createServer(reapp)
 const httpPORT = process.env.HTTPPORT || 8080
 reapp.all('*', function(req, res) {
-  return res.redirect("https://" + req.headers["host"].replace('8080', '443') + req.url)
+  try {
+    return res.redirect("https://" + req.headers["host"].replace('8080', '443') + req.url)
+  } catch (e) {
+    sysLog.error(e)
+  }
 })
 
 //https-ssl
@@ -39,11 +48,6 @@ let httpsServer = https.createServer({
 }, app)
 const httpsPORT = process.env.HTTPSPORT || 443
 app.use(favicon(path.join(__dirname, '../static', 'icon-cloud.png')))
-
-// 处理日志
-log4js.configure(configLog)
-app.use(log4js.connectLogger(log4js.getLogger('http'), { level: 'auto' }))
-let sysLog = log4js.getLogger('sys')
 
 // 路由
 app.use(express.static(__dirname + '/'))
