@@ -7,12 +7,10 @@ let fs = require('fs')
 let path = require('path')
 let express = require('express')
 let bodyParser = require('body-parser')
-let morgan = require('morgan')
-let rfs = require('rotating-file-stream')
+let favicon = require('serve-favicon')
 let db = require('./models')
 let log4js = require('log4js')
 let configLog = require('./config-log')
-let favicon = require('serve-favicon')
 
 // 处理日志
 log4js.configure(configLog)
@@ -26,6 +24,7 @@ db.connect()
 // 启动路由及端口处理
 let reapp = express()
 let app = express()
+app.use(favicon(path.join(__dirname, '../static', 'icon-cloud.png')))
 app.use(log4js.connectLogger(log4js.getLogger('http'), { level: 'auto' }))
 
 // http转发
@@ -48,7 +47,6 @@ let httpsServer = https.createServer({
   honorCipherOrder: true
 }, app)
 const httpsPORT = process.env.HTTPSPORT || 443
-app.use(favicon(path.join(__dirname, '../static', 'icon-cloud.png')))
 
 // 路由
 app.use(express.static(__dirname + '/'))
