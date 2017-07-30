@@ -35,6 +35,7 @@ reapp.all('*', function(req, res) {
   try {
     return res.redirect("https://" + req.headers["host"].replace('8080', '443') + req.url)
   } catch (e) {
+    sysLog.error(req.headers + req.url)
     sysLog.error(e)
   }
 })
