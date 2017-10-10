@@ -9,14 +9,14 @@
     "serve": "node ./server-node/index.js"
   },
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "crypto": "^0.0.3",
-    "express": "^4.15.3",
-    "log4js": "^2.2.0",
-    "mongoose": "^4.11.3",
-    "redis": "^2.7.1",
-    "serve-favicon": "^2.4.3",
-    "serve-index": "^1.9.0",
-    "superagent": "^3.5.2"
+    "body-parser": "^1.18.2",
+    "crypto": "^1.0.1",
+    "express": "^4.16.1",
+    "log4js": "^2.3.4",
+    "mongoose": "^4.12.1",
+    "redis": "^2.8.0",
+    "serve-favicon": "^2.4.5",
+    "serve-index": "^1.9.1",
+    "superagent": "^3.6.3"
   }
 }
