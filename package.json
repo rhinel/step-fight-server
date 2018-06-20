@@ -1,7 +1,6 @@
 {
   "name": "step-fight-server",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
   "repository": "https://github.com/rhinel/step-fight-server.git",
   "author": "rhinel <rhinelkc@hotmail.com>",
   "license": "MIT",
