@@ -5,6 +5,7 @@
   "repository": "https://github.com/rhinel/step-fight-server.git",
   "author": "rhinel <rhinelkc@hotmail.com>",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "serve": "node ./server-node/index.js"
   },
